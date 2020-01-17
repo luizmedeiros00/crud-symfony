@@ -1,0 +1,58 @@
+
+{% macro service_template(contato) %}
+        <div class="col-md-5">
+            {{ form_row(contato.tipo)}}
+        </div>  
+        <div class="col-md-5">
+            {{ form_row(contato.contato)}}
+        </div>
+{% endmacro %}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-2">
+                <div class="card-header">Dados Pessoa</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.tipo) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.identificador) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.nome) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="number" id="valueAdicionar" name="valueAdicionar" value="1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="contatos_list" data-prototype="
+        {{ _self.service_template(form.contatos.vars.prototype)|e('html_attr') }}
+        "> 
+            <div class="card">
+                <div class="card-header">Contato </div>
+                <div class="card-body" >
+                    <div class="connected-sortable droppable-area1" id="card_contatos">
+                        {% for contato in form.contatos %}
+                        {% endfor %}
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+        <button class="btn btn-primary">{{ button_label|default('Salvar') }}</button>
+    {{ form_end(form) }}
